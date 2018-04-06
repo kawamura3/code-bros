@@ -1,0 +1,9 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - gem install rubocop
+  build:
+    commands:
+      - rubocop -R

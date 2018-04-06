@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - gem install bundler --no-ri --no-doc
+      - bundle install -j $(nproc) --path vendor
+      - gem install rspec
+  pre_build:
+    commands:
+      - bundle exec rails db:migrate
+  build:
+    commands:
+      - rspec spec
+artifacts:
+  base-directory: coverage
