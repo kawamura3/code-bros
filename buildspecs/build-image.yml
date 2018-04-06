@@ -6,30 +6,30 @@ env:
     EB_APP_NAME: bbb
 
 phases:
-  install:
-    commands:
-      - apk add --update python py-pip && pip install --upgrade pip && pip install awscli
+  # install:
+  #   commands:
+  #     - apk add --update python py-pip && pip install --upgrade pip && pip install awscli
   pre_build:
     commands:
       - mv buildspecs/Dockerfile Dockerfile
   build:
     commands:
-      - docker build -t ${DOCKER_REGISTRY}/${EB_APP_NAME}:app-latest
-        --build-arg SECRET_KEY_BASE=$SECRET_KEY_BASE
-        --build-arg AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-        --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
-        --build-arg AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-        --build-arg S3_BUCKET=$S3_BUCKET
-        --build-arg SES_ACCESS_KEY_ID=$SES_ACCESS_KEY_ID
-        --build-arg SES_DEFAULT_REGION=$SES_DEFAULT_REGION
-        --build-arg SES_SECRET_ACCESS_KEY=$SES_SECRET_ACCESS_KEY
-        --build-arg RDS_USERNAME=$RDS_USERNAME
-        --build-arg RDS_PASSWORD=$RDS_PASSWORD
-        --build-arg RDS_HOSTNAME=$RDS_HOSTNAME
-        --build-arg RAILS_SERVE_STATIC_FILES=$RAILS_SERVE_STATIC_FILES 
-        --build-arg ROLLBAR_TOKEN=$ROLLBAR_TOKEN
-        --build-arg TEST_VARIABLE=$TEST_VARIABLE
-        .
+      - docker build -t ${DOCKER_REGISTRY}/${EB_APP_NAME}:app-latest .
+        # --build-arg SECRET_KEY_BASE=$SECRET_KEY_BASE
+        # --build-arg AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+        # --build-arg AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+        # --build-arg AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+        # --build-arg S3_BUCKET=$S3_BUCKET
+        # --build-arg SES_ACCESS_KEY_ID=$SES_ACCESS_KEY_ID
+        # --build-arg SES_DEFAULT_REGION=$SES_DEFAULT_REGION
+        # --build-arg SES_SECRET_ACCESS_KEY=$SES_SECRET_ACCESS_KEY
+        # --build-arg RDS_USERNAME=$RDS_USERNAME
+        # --build-arg RDS_PASSWORD=$RDS_PASSWORD
+        # --build-arg RDS_HOSTNAME=$RDS_HOSTNAME
+        # --build-arg RAILS_SERVE_STATIC_FILES=$RAILS_SERVE_STATIC_FILES 
+        # --build-arg ROLLBAR_TOKEN=$ROLLBAR_TOKEN
+        # --build-arg TEST_VARIABLE=$TEST_VARIABLE
+        # .
       - docker tag ${DOCKER_REGISTRY}/${EB_APP_NAME}:app-latest ${DOCKER_REGISTRY}/${EB_APP_NAME}:app-$CI_BUILD_REF
       # - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
       # - docker push ${DOCKER_REGISTRY}/${EB_APP_NAME}:app-$CI_BUILD_REF
