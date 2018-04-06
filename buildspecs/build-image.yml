@@ -11,7 +11,7 @@ phases:
       - apk add --update python py-pip && pip install --upgrade pip && pip install awscli
   pre_build:
     commands:
-      - mv Dockerfile ../Dockerfile
+      - mv buildspecs/Dockerfile Dockerfile
   build:
     commands:
       - docker build -t ${DOCKER_REGISTRY}/${EB_APP_NAME}:app-latest
