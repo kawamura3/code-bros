@@ -52,6 +52,6 @@ EXPOSE 3000
 
 RUN RAILS_ENV=$RAILS_ENV DB_ADAPTER=nulldb bundle exec rake assets:precompile assets:clean
 
-ADD start.sh /start.sh
+ADD buildspecs/start.sh /start.sh
 RUN chmod +x /start.sh
 CMD ["/start.sh"]
