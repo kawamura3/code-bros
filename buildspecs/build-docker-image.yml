@@ -7,7 +7,7 @@ phases:
       - aws --version
       - echo aws ecr get-login --region ${AWS_DEFAULT_REGION}
       - echo REPOSITORY_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_NAME}
-      - $(aws ecr get-login --region ${AWS_DEFAULT_REGION})
+      - $(aws ecr get-login --region ${AWS_DEFAULT_REGION} --no-include-email)
       - REPOSITORY_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_NAME}
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - mv buildspecs/Dockerfile Dockerfile
